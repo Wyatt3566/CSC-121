@@ -11,7 +11,7 @@ distances = {
 
 def main():
     for distance in distances.values():
-        print(f"{distance} AU is {convert(distances)} m")
+        print(f"{distance} AU is {convert(distance)} m")
 
 
 def convert(au):

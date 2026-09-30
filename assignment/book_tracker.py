@@ -1,4 +1,3 @@
-Library = []
 
 def dashboard():
 
@@ -33,7 +32,7 @@ def estimate_reading_time(pages):
     return(round(int(pages)/40, 1))
 
 
-def add_book():
+def add_book(Library):
 
     #gets input for title, auther, and pages    
     title = input("Book title: ").strip().title()
@@ -62,7 +61,7 @@ def add_book():
 
 
 
-def view_books():
+def view_books(Library):
     if len(Library) == 0:
             print("Your library is empty. Add a book first!")
   
@@ -76,6 +75,10 @@ def view_books():
 
 
 def main():
+
+
+    Library = []
+
     dashboard()
 
 
@@ -83,10 +86,10 @@ def main():
         Choice = show_menu()
 
         if Choice == "1":
-            view_books()
+            view_books(Library)
 
         elif Choice == "2":
-            add_book()
+            add_book(Library)
         elif Choice == "q" or Choice == "quit" or Choice == "exit":
             print("Goodbye!")
             break

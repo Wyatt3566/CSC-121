@@ -9,6 +9,7 @@ def main():
         reader = csv.DictReader(views)
         writer = csv.DictWriter(analysis, fieldnames=reader.fieldnames + ["brightness"])
         writer.writeheader()
+        
         for row in reader:
 
             row["brightness"] = round(calculate_brightness(f"{row['id']}.jpeg"), 2)

@@ -48,4 +48,4 @@ def test_format_book_comma_in_title():
         "hours": "10.9"
         }
 
-    assert format_book(book, 2)[:3] ==  "2. "
+    assert format_book(book, 2) ==  "2. 'The Long Way To A Small, Angry Planet' - Becky Chambers (438 pages - approx. 10.9 hours to read)"

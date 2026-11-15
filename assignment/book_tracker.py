@@ -1,3 +1,6 @@
+import csv
+
+
 
 def dashboard():
 
@@ -10,9 +13,6 @@ def dashboard():
     print("=" * 40)
     print("  📚  YOUR LIBRARY ")
     print("=" * 40)
-
-
-
 
 
 def show_menu():
@@ -44,14 +44,19 @@ def add_book(Library):
 
     #Adds book info to a dictionary
     book = {
-        "Title": title,
-        "Author": author,
-        "Pages": pages,
-        "Hours": hours
+        "title": title,
+        "author": author,
+        "pages": pages,
+        "hours": hours
     }
 
     #Adds book to list
     Library.append(book)
+
+    with open("books.csv", "a") as file:
+        writer = csv.DictWriter(file, fieldnames=["title", "author", "pages", "hours"])
+
+        writer.writerow(book)
 
 
     #prints book's description
@@ -59,6 +64,8 @@ def add_book(Library):
     print(f"  '{title}' by {author} -- approx. {hours} hours to read")
 
 
+def format_book(book: dict, num):
+    return(f"{num}. '{book["title"]}' - {book["author"]} ({book["pages"]} pages - approx. {book["hours"]} hours to read)")
 
 
 def view_books(Library):
@@ -69,15 +76,33 @@ def view_books(Library):
 
         for num in range(len(Library)):
             book = Library[num]
-            print(f"{num + 1}. '{book["Title"]}' - {book["Author"]} ({book["Pages"]} pages - approx. {book["Hours"]} hours to read)")
+            print(format_book(book, num + 1))
 
 
+def load_books():
+    library = []
 
+    with open("books.csv", "r") as file:
+        
+        reader = csv.DictReader(file)
+
+        for row in reader:
+            book = {
+            "title": row["title"],
+            "author": row["author"],
+            "pages": int(row["pages"]),
+            "hours": float(row["hours"])
+            }
+
+            library.append(book)
+
+    return(library)
+            
 
 def main():
 
 
-    Library = []
+    Library = load_books()
 
     dashboard()
 
